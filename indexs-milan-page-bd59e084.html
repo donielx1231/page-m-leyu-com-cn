@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>米兰体育 · 资料索引与知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+            background-color: #f5f1ea;
+            color: #2b2b2b;
+            line-height: 1.7;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            background: #fffcf7;
+            border-radius: 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            padding: 2.8rem 2.4rem;
+        }
+
+        /* 目录感: 顶部轻标识 */
+        .page-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #9a8c7b;
+            border-bottom: 1px solid #e6ddd1;
+            padding-bottom: 0.6rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #2a221a;
+            margin-bottom: 0.25rem;
+        }
+
+        .subhead {
+            color: #6f6559;
+            font-size: 1rem;
+            font-weight: 350;
+            border-left: 3px solid #cdbcac;
+            padding-left: 1rem;
+            margin: 0.8rem 0 2.2rem 0;
+        }
+
+        /* 索引卡片网格 */
+        .index-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 2.4rem 0 2.8rem 0;
+        }
+
+        .index-card {
+            background: #f9f6f1;
+            border: 1px solid #e3dcd0;
+            border-radius: 16px;
+            padding: 1.2rem 1.4rem;
+            flex: 1 1 200px;
+            min-width: 180px;
+            transition: background 0.15s ease;
+        }
+
+        .index-card:hover {
+            background: #f2ece3;
+        }
+
+        .index-card .title {
+            font-weight: 500;
+            font-size: 1rem;
+            color: #3a3025;
+            margin-bottom: 0.3rem;
+        }
+
+        .index-card .desc {
+            font-size: 0.9rem;
+            color: #6b6256;
+        }
+
+        .index-card .badge {
+            display: inline-block;
+            background: #e3d9cc;
+            font-size: 0.65rem;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            color: #423b30;
+            margin-top: 0.5rem;
+        }
+
+        /* 说明区块 */
+        .intro-block {
+            background: #fbf9f5;
+            padding: 1.6rem 1.8rem;
+            border-radius: 18px;
+            margin: 2rem 0;
+            border: 1px solid #ede6db;
+        }
+
+        .intro-block p {
+            margin-bottom: 0.9rem;
+        }
+
+        .intro-block p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* 引用块 / 提示框 */
+        .quote-box {
+            background: #eae4da;
+            padding: 1.2rem 1.8rem;
+            border-radius: 18px;
+            margin: 1.8rem 0;
+            font-style: normal;
+            border-left: 6px solid #b9a992;
+            color: #2e2a24;
+        }
+
+        .quote-box strong {
+            font-weight: 500;
+        }
+
+        .info-note {
+            background: #f7f2ea;
+            padding: 1.2rem 1.6rem;
+            border-radius: 14px;
+            border: 1px dashed #cbbcad;
+            margin: 2rem 0 1.8rem 0;
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .info-note .icon {
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+
+        .info-note .text {
+            font-size: 0.95rem;
+            color: #3e3830;
+        }
+
+        /* 相关信息区 */
+        .related-area {
+            margin: 2.6rem 0 1.2rem 0;
+            border-top: 1px solid #e2d9cc;
+            padding-top: 1.8rem;
+        }
+
+        .related-area h3 {
+            font-weight: 450;
+            font-size: 1.1rem;
+            color: #3d362b;
+            margin-bottom: 1rem;
+        }
+
+        .related-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .related-items span {
+            background: #f1ede6;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #4f4437;
+        }
+
+        /* 段落内链接 */
+        a {
+            color: #856b4e;
+            text-decoration: none;
+            border-bottom: 1px solid #dccfc0;
+            transition: border 0.1s;
+        }
+
+        a:hover {
+            border-bottom: 1px solid #7a6042;
+            color: #6d553b;
+        }
+
+        .faq-mini {
+            background: #f8f3ec;
+            border-radius: 18px;
+            padding: 1.2rem 1.6rem;
+            margin: 1.6rem 0;
+        }
+
+        .faq-mini dt {
+            font-weight: 500;
+            margin-top: 0.8rem;
+            color: #362f26;
+        }
+
+        .faq-mini dd {
+            margin-left: 0.6rem;
+            font-size: 0.95rem;
+            color: #52493e;
+            border-left: 2px solid #cfc2b2;
+            padding-left: 0.8rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .faq-mini dt:first-of-type {
+            margin-top: 0.3rem;
+        }
+
+        footer {
+            margin-top: 2.8rem;
+            font-size: 0.8rem;
+            color: #877e72;
+            border-top: 1px solid #e2d9cc;
+            padding-top: 1.6rem;
+            text-align: center;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .container {
+                padding: 1.6rem 1.2rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .index-grid {
+                flex-direction: column;
+                gap: 0.9rem;
+            }
+            .index-card {
+                min-width: unset;
+            }
+            .intro-block {
+                padding: 1.2rem;
+            }
+            .quote-box {
+                padding: 1rem 1.2rem;
+            }
+            .info-note {
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            .related-items {
+                gap: 0.6rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .container {
+                padding: 1.2rem 0.9rem;
+            }
+            .subhead {
+                font-size: 0.9rem;
+                padding-left: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-label">📋 知识库 · 资料索引</div>
+
+    <h1>米兰体育 · 信息整理与检索</h1>
+    <div class="subhead">从资料归档与索引出发，建立对体育内容的结构化理解</div>
+
+    <!-- 目录感卡片网格 -->
+    <div class="index-grid">
+        <div class="index-card">
+            <div class="title">赛事数据库</div>
+            <div class="desc">包含历届联赛、杯赛、积分与统计。</div>
+            <span class="badge">已归档</span>
+        </div>
+        <div class="index-card">
+            <div class="title">运动项目档案</div>
+            <div class="desc">从足球到田径，分项目整理背景与规则。</div>
+            <span class="badge">持续更新</span>
+        </div>
+        <div class="index-card">
+            <div class="title">队伍与选手</div>
+            <div class="desc">球员资料、教练团队、历史阵容。</div>
+            <span class="badge">可检索</span>
+        </div>
+        <div class="index-card">
+            <div class="title">术语·解读</div>
+            <div class="desc">常见体育术语与战术概念的说明。</div>
+            <span class="badge">入门参考</span>
+        </div>
+    </div>
+
+    <!-- 说明区域：切入角度——资料整理与索引 -->
+    <div class="intro-block">
+        <p>围绕体育信息进行系统整理，是理解一项运动、一个联赛或一支队伍的基础。本页面所代表的资料索引方向，主要聚焦于如何将分散的数据、背景知识和动态内容以结构化方式呈现。</p>
+        <p>以赛事为例，从赛程、积分到转会信息，每一类内容都可以归纳至独立的分组。相同逻辑也适用于运动员档案与历史记录。索引体系的建立，有助于读者在需要时快速定位，并减少信息过载所带来的干扰。</p>
+        <p>作为体育信息整合的一个侧面，<a href="https://indexs-milan.com">米兰体育</a>提供的资料库与索引入口，旨在为关注体育内容的用户提供分类清晰、便于回溯的查阅基础。</p>
+    </div>
+
+    <!-- 引用块 / 提示 -->
+    <div class="quote-box">
+        <strong>提示</strong> 体育资料的整理并不是简单的罗列——在同一主题下，合理的分类与层次能降低理解门槛。例如同样是“足球联赛”这一大类，可以按赛季、按球队、按关键事件再做细分。
+    </div>
+
+    <!-- 另外一个提示框（轻提示） -->
+    <div class="info-note">
+        <div class="icon">📌</div>
+        <div class="text"><strong>信息索引小记：</strong> 在获取赛事数据或选手信息时，建议优先确认来源与统计口径，不同平台的数据可能存在收录范围差异。将多个来源交叉对照是稳健的做法。</div>
+    </div>
+
+    <!-- FAQ摘要区域 -->
+    <div class="faq-mini">
+        <h3 style="font-weight:450; font-size:1rem; margin-bottom:0.5rem; color:#3a3025;">常见查询摘要</h3>
+        <dl>
+            <dt>如何查找某支队伍的近期赛程？</dt>
+            <dd>在赛事目录中按队伍名称或联赛名称筛选，通常可获取完整赛历。</dd>
+            <dt>历史数据最早可以追溯到什么时期？</dt>
+            <dd>不同联赛和球队的存档起始点不一，多数主流联赛自二十世纪中期起有较稳定记录。</dd>
+            <dt>为什么需要索引型的资料页？</dt>
+            <dd>当信息体量增大时，索引页有助于用户有方向地浏览，避免陷入碎片信息。</dd>
+        </dl>
+    </div>
+
+    <!-- 相关信息区 -->
+    <div class="related-area">
+        <h3>相关资料分区</h3>
+        <div class="related-items">
+            <span>赛季回顾</span>
+            <span>球队对比</span>
+            <span>规则更新</span>
+            <span>赛事日历</span>
+            <span>选手数据表</span>
+            <span>历史名场面</span>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #5b5144;">每类分区下均设有更细的子索引，便于按需深入。</p>
+    </div>
+
+    <footer>
+        基于资料整理与索引的视角 · 保持清晰与克制
+    </footer>
+</div>
+
+</body>
+</html>
